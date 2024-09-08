@@ -31,7 +31,7 @@ pipeline {
                 }
             }
             steps {
-                deploy adapters: [tomcat7(credentialsId: 'tomcat-username-password', path: '', url: 'http://44.204.26.124:8080')], contextPath: 'null , war.'*/*.war'
+                deploy adapters: [tomcat7(credentialsId: 'tomcat-username-password', path: '', url: 'http://44.204.26.124:8080')], contextPath: 'null , war. '*/* .war'
             }
         }
     }
@@ -41,4 +41,5 @@ pipeline {
             // Add cleanup steps if needed
         }
     }
+}
 }
