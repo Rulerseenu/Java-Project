@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building the Spring PetClinic application for ${APP_ENV} environment..."
-                sh mvn clean install
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
