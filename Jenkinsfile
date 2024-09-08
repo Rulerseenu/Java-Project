@@ -31,10 +31,7 @@ pipeline {
                 }
             }
             steps {
-                echo "Deploying the Spring PetClinic application to ${APP_ENV} environment..."
-                // Add deployment steps here, e.g., copying files, running deployment scripts
-                // Example:
-                // sh './deploy.sh ${APP_ENV}'
+                deploy adapters: [tomcat7(credentialsId: 'tomcat-username-password', path: '', url: 'http://44.204.26.124:8080')], contextPath: 'null , war.'*/*.war \'',
             }
         }
     }
