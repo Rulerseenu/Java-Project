@@ -19,7 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Running tests for ${APP_ENV} environment..."
-                sh './mvnw test'
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
