@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools{
+        maven 'maven'
+    }
     parameters {
         choice(name: 'DEPLOY_ENV', choices: ['dev', 'staging', 'production'], description: 'Choose the environment to deploy to')
     }
@@ -10,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building the Spring PetClinic application for ${APP_ENV} environment..."
-                sh './mvnw clean package'
+                sh mvn clean install
             }
         }
         stage('Test') {
