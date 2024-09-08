@@ -1,14 +1,18 @@
 pipeline {
     agent any
-    tools{
+    
+    tools {
         maven 'maven'
     }
+    
     parameters {
         choice(name: 'DEPLOY_ENV', choices: ['dev', 'staging', 'production'], description: 'Choose the environment to deploy to')
     }
+    
     environment {
         APP_ENV = "${params.DEPLOY_ENV}"
     }
+    
     stages {
         stage('Build') {
             steps {
@@ -16,12 +20,14 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+        
         stage('Test') {
             steps {
                 echo "Running tests for ${APP_ENV} environment..."
                 sh 'mvn test'
             }
         }
+        
         stage('Deploy') {
             when {
                 anyOf {
@@ -31,10 +37,13 @@ pipeline {
                 }
             }
             steps {
-                deploy adapters: [tomcat7(credentialsId: 'tomcat-username-password', path: '', url: 'http://44.204.26.124:8080')], contextPath: 'null , war. '*/* .war'
+                // Make sure to use the correct deploy step if you're using a plugin
+                deploy adapters: [tomcat7(credentialsId: 'tomcat-username-password', path: '', url: 'http://44.204.26.124:8080')],
+                        contextPath: '', war: '**/*.war'
             }
         }
     }
+    
     post {
         always {
             echo "Cleaning up..."
