@@ -38,7 +38,7 @@ pipeline {
             }
             steps {
                 // Make sure to use the correct deploy step if you're using a plugin
-                deploy adapters: [tomcat7(credentialsId: 'tomcat-username-password', path: '', url: 'http://44.204.26.124:8080')],
+                deploy adapters: [tomcat7(credentialsId: 'tomcat-username-password', path: '', url: 'http://http://3.87.202.232:8080/')],
                         contextPath: '', war: '**/*.war'
             }
         }
